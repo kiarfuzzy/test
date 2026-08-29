@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Filament Cost Calculator — PrintCalc</title>
+<meta name="description" content="Calculate the real cost of a 3D print from your spool price and grams used. Free, instant, no sign-up.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Crect x='1' y='1' width='18' height='18' rx='5' fill='%234F46E5'/%3E%3Crect x='4' y='4' width='5' height='5' rx='1' fill='white'/%3E%3Crect x='11' y='4' width='5' height='5' rx='1' fill='white' opacity='0.6'/%3E%3Crect x='4' y='11' width='5' height='5' rx='1' fill='white' opacity='0.6'/%3E%3Crect x='11' y='11' width='5' height='5' rx='1' fill='white'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@700;800&amp;family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="logo" href="index.html">
+      <span class="mark"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><rect x="1" y="1" width="4" height="4" rx="1" fill="currentColor"/><rect x="8" y="1" width="5" height="4" rx="1" fill="currentColor" opacity="0.6"/><rect x="1" y="8" width="5" height="5" rx="1" fill="currentColor" opacity="0.6"/><rect x="8" y="8" width="5" height="5" rx="1" fill="currentColor"/></svg></span>
+      PrintCalc
+    </a>
+    <div class="nav-menu">
+      <div class="nav-item">
+        <a href="index.html#cost">Cost</a>
+        <div class="dropdown"><div class="dropdown-inner">
+          <a href="filament-cost.html">Filament Cost</a>
+          <a href="print-time-cost.html">Print Time &amp; Electricity</a>
+          <a href="total-print-cost.html">Total Print Cost</a>
+        </div></div>
+      </div>
+      <div class="nav-item">
+        <a href="index.html#convert">Convert</a>
+        <div class="dropdown"><div class="dropdown-inner">
+          <a href="weight-length.html">Weight ⇄ Length</a>
+          <a href="temperature.html">Temperature</a>
+          <a href="spool-remaining.html">Spool Remaining</a>
+        </div></div>
+      </div>
+      <div class="nav-item">
+        <a href="index.html#plan">Plan &amp; Tune</a>
+        <div class="dropdown"><div class="dropdown-inner">
+          <a href="material-usage.html">Material Usage</a>
+          <a href="model-scaling.html">Model Scaling</a>
+          <a href="print-speed.html">Print Speed / Flow</a>
+        </div></div>
+      </div>
+      <div class="nav-item">
+        <a href="guides.html">Guides</a>
+      </div>
+    </div>
+    <a class="nav-all" href="index.html#cost">All calculators</a>
+  </div>
+</nav>
+
+<div class="wrap breadcrumb"><a href="index.html#cost">Cost</a> / Filament Cost</div>
+<div class="wrap page-head">
+  <h1>Filament Cost Calculator</h1>
+  <p>Enter your spool price and how much filament the print used — get the real cost, down to the cent.</p>
+</div>
+
+<div class="wrap calc-layout">
+  <div class="panel">
+    <p class="panel-title">Your numbers</p>
+    <div class="field-row">
+      <div class="field">
+        <label for="fc-price">Spool price</label>
+        <input type="number" id="fc-price" step="0.01" min="0" value="20" inputmode="decimal">
+      </div>
+      <div class="field" style="max-width:96px;">
+        <label for="fc-currency">Currency</label>
+        <input type="text" id="fc-currency" maxlength="3" value="$">
+      </div>
+    </div>
+    <div class="field">
+      <label for="fc-spool-weight">Spool weight (g)</label>
+      <input type="number" id="fc-spool-weight" step="1" min="1" value="1000" inputmode="decimal">
+    </div>
+    <div class="field">
+      <label for="fc-used">Filament used for this print (g)</label>
+      <input type="number" id="fc-used" step="0.1" min="0" value="35" inputmode="decimal">
+    </div>
+  </div>
+  <div class="results-panel" aria-live="polite">
+    <p class="panel-title">Result</p>
+    <div class="result-row primary">
+      <span class="result-label">Cost of this print</span>
+      <span class="result-value" id="fc-cost">$0.70</span>
+    </div>
+    <div class="result-row">
+      <span class="result-label">Price per gram</span>
+      <span class="result-value" id="fc-per-gram">$0.0200</span>
+    </div>
+  </div>
+</div>
+
+<div class="wrap related">
+  <h2>Related calculators</h2>
+  <div class="related-grid">
+    <a class="card" href="print-time-cost.html">
+      <span class="icon-badge"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="7.2" stroke="currentColor" stroke-width="1.6"/><path d="M10 5.5V10L13.2 11.8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M17.5 12.5L13.5 18.5L16.3 18.5L12.8 23" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      <h3>Print Time &amp; Electricity</h3>
+      <p>Power draw + your rate → the energy cost of a print.</p>
+    </a>
+    <a class="card" href="total-print-cost.html">
+      <span class="icon-badge"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3L21 8.5L12 14L3 8.5L12 3Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M3 13.5L12 19L21 13.5" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></span>
+      <h3>Total Print Cost</h3>
+      <p>Filament, electricity, depreciation, and labor — combined.</p>
+    </a>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap footer-inner">
+    <span><strong>PrintCalc</strong> — built for people who'd rather print than do math.</span>
+    <span>Figures are estimates. Always confirm with your slicer before ordering material.</span>
+  </div>
+</footer>
+
+<script>
+  var $ = function(id){ return document.getElementById(id); };
+  var fmt = function(n, d){ d = d === undefined ? 2 : d; return isFinite(n) ? n.toFixed(d) : (0).toFixed(d); };
+  function calc(){
+    var price = parseFloat($('fc-price').value) || 0;
+    var spoolWeight = parseFloat($('fc-spool-weight').value) || 0;
+    var used = parseFloat($('fc-used').value) || 0;
+    var currency = $('fc-currency').value || '$';
+    var perGram = spoolWeight > 0 ? price / spoolWeight : 0;
+    var cost = perGram * used;
+    $('fc-cost').textContent = currency + fmt(cost, 2);
+    $('fc-per-gram').textContent = currency + fmt(perGram, 4);
+  }
+  ['fc-price','fc-spool-weight','fc-used','fc-currency'].forEach(function(id){ $(id).addEventListener('input', calc); });
+  calc();
+</script>
+
+</body>
+</html>

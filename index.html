@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PrintCalc — Free 3D Printing Calculators</title>
+<meta name="description" content="Nine free calculators for 3D printing: filament cost, print time & electricity, unit conversion, material usage, model scaling, and print speed. No sign-up, no ads.">
+<meta property="og:title" content="PrintCalc — Free 3D Printing Calculators">
+<meta property="og:description" content="Nine fast, free calculators for 3D printing hobbyists — cost, conversion, and print planning.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Crect x='1' y='1' width='18' height='18' rx='5' fill='%234F46E5'/%3E%3Crect x='4' y='4' width='5' height='5' rx='1' fill='white'/%3E%3Crect x='11' y='4' width='5' height='5' rx='1' fill='white' opacity='0.6'/%3E%3Crect x='4' y='11' width='5' height='5' rx='1' fill='white' opacity='0.6'/%3E%3Crect x='11' y='11' width='5' height='5' rx='1' fill='white'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="logo" href="index.html">
+      <span class="mark"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><rect x="1" y="1" width="4" height="4" rx="1" fill="currentColor"/><rect x="8" y="1" width="5" height="4" rx="1" fill="currentColor" opacity="0.6"/><rect x="1" y="8" width="5" height="5" rx="1" fill="currentColor" opacity="0.6"/><rect x="8" y="8" width="5" height="5" rx="1" fill="currentColor"/></svg></span>
+      PrintCalc
+    </a>
+    <div class="nav-menu">
+      <div class="nav-item">
+        <a href="index.html#cost">Cost</a>
+        <div class="dropdown"><div class="dropdown-inner">
+          <a href="filament-cost.html">Filament Cost</a>
+          <a href="print-time-cost.html">Print Time &amp; Electricity</a>
+          <a href="total-print-cost.html">Total Print Cost</a>
+        </div></div>
+      </div>
+      <div class="nav-item">
+        <a href="index.html#convert">Convert</a>
+        <div class="dropdown"><div class="dropdown-inner">
+          <a href="weight-length.html">Weight ⇄ Length</a>
+          <a href="temperature.html">Temperature</a>
+          <a href="spool-remaining.html">Spool Remaining</a>
+        </div></div>
+      </div>
+      <div class="nav-item">
+        <a href="index.html#plan">Plan &amp; Tune</a>
+        <div class="dropdown"><div class="dropdown-inner">
+          <a href="material-usage.html">Material Usage</a>
+          <a href="model-scaling.html">Model Scaling</a>
+          <a href="print-speed.html">Print Speed / Flow</a>
+        </div></div>
+      </div>
+      <div class="nav-item">
+        <a href="guides.html">Guides</a>
+      </div>
+    </div>
+    <a class="nav-all" href="index.html#cost">All calculators</a>
+  </div>
+</nav>
+
+<header class="hero wrap">
+  <div class="hero-grid">
+    <div>
+      <span class="eyebrow">Free · No sign-up</span>
+      <h1>Precise calculators for 3D printing, without the guesswork.</h1>
+      <p class="lead">Nine tools covering cost, unit conversion, and print planning — built for people who'd rather be printing than doing math.</p>
+      <a class="btn-primary" href="#cost">Browse calculators →</a>
+    </div>
+    <div class="hero-demo">
+      <div class="hero-demo-bar">
+        <span class="hero-demo-dot"></span><span class="hero-demo-dot"></span><span class="hero-demo-dot"></span>
+        <span class="hero-demo-title">filament-cost.html</span>
+      </div>
+      <div class="hero-demo-body">
+        <div class="hero-demo-row">
+          <span class="hero-demo-label">Spool price</span>
+          <input class="hero-demo-input" id="demo-price" type="number" value="20" step="0.01" inputmode="decimal" aria-label="Demo spool price">
+        </div>
+        <div class="hero-demo-row">
+          <span class="hero-demo-label">Grams used</span>
+          <input class="hero-demo-input" id="demo-used" type="number" value="35" step="0.1" inputmode="decimal" aria-label="Demo grams used">
+        </div>
+        <div class="hero-demo-row">
+          <span class="hero-demo-label">Cost</span>
+          <span class="hero-demo-result" id="demo-result">$0.70</span>
+        </div>
+      </div>
+      <div class="hero-demo-foot">
+        <a href="filament-cost.html">Open full calculator →</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="cost" class="category">
+  <div class="wrap">
+    <div class="category-head">
+      <div>
+        <h2>Cost</h2>
+        <p>What a print actually costs you, in materials and electricity.</p>
+      </div>
+    </div>
+    <div class="card-grid">
+      <a class="card" href="filament-cost.html">
+        <span class="icon-badge"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="6.2" stroke="currentColor" stroke-width="1" stroke-dasharray="2 2" opacity="0.6"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.6"/><path d="M18.5 18.5L21 21" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
+        <h3>Filament Cost</h3>
+        <p>Spool price + grams used → the real cost, to the cent.</p>
+      </a>
+      <a class="card" href="print-time-cost.html">
+        <span class="icon-badge"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="7.2" stroke="currentColor" stroke-width="1.6"/><path d="M10 5.5V10L13.2 11.8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M17.5 12.5L13.5 18.5L16.3 18.5L12.8 23" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <h3>Print Time &amp; Electricity</h3>
+        <p>Power draw + your rate → the energy cost of a print.</p>
+      </a>
+      <a class="card" href="total-print-cost.html">
+        <span class="icon-badge"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3L21 8.5L12 14L3 8.5L12 3Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M3 13.5L12 19L21 13.5" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></span>
+        <h3>Total Print Cost</h3>
+        <p>Filament, electricity, depreciation, and labor — combined.</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section id="convert" class="category">
+  <div class="wrap">
+    <div class="category-head">
+      <div>
+        <h2>Convert</h2>
+        <p>Move between the units and measurements you actually deal with.</p>
+      </div>
+    </div>
+    <div class="card-grid">
+      <a class="card" href="weight-length.html">
+        <span class="icon-badge"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 8V16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M20 8V16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M4 12H20" stroke="currentColor" stroke-width="1.6"/><path d="M7.5 9L4 12L7.5 15" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M16.5 9L20 12L16.5 15" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <h3>Weight ⇄ Length</h3>
+        <p>Type either value for any material — the other updates.</p>
+      </a>
+      <a class="card" href="temperature.html">
+        <span class="icon-badge"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M10.5 4.5a1.8 1.8 0 0 1 3.6 0v8.7a4 4 0 1 1-3.6 0V4.5Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12.3" cy="17" r="1.5" fill="currentColor"/></svg></span>
+        <h3>Temperature</h3>
+        <p>Celsius ⇄ Fahrenheit, plus typical ranges by material.</p>
+      </a>
+      <a class="card" href="spool-remaining.html">
+        <span class="icon-badge"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="1.6" opacity="0.3"/><path d="M12 4A8 8 0 0 1 18.9 16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M12 12L12 5.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
+        <h3>Spool Remaining</h3>
+        <p>Weigh your spool, know exactly what's left.</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section id="plan" class="category">
+  <div class="wrap">
+    <div class="category-head">
+      <div>
+        <h2>Plan &amp; Tune</h2>
+        <p>Work out what a print will take before you commit to it.</p>
+      </div>
+    </div>
+    <div class="card-grid">
+      <a class="card" href="material-usage.html">
+        <span class="icon-badge"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3L20.5 8V17L12 22L3.5 17V8L12 3Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M12 3V12.5M12 12.5L20.5 8M12 12.5L3.5 8M12 12.5V22" stroke="currentColor" stroke-width="1.1" opacity="0.5"/></svg></span>
+        <h3>Material Usage</h3>
+        <p>Model volume + infill + walls → an estimate before you slice.</p>
+      </a>
+      <a class="card" href="model-scaling.html">
+        <span class="icon-badge"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 4H4V9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M15 4H20V9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 20H4V15" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M15 20H20V15" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <h3>Model Scaling</h3>
+        <p>Resize a model and see the new weight, instantly.</p>
+      </a>
+      <a class="card" href="print-speed.html">
+        <span class="icon-badge"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4.5 16a7.5 7.5 0 1 1 15 0" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M12 16L15.5 10.8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="12" cy="16" r="1.4" fill="currentColor"/></svg></span>
+        <h3>Print Speed / Flow</h3>
+        <p>Layer height + line width → your printer's speed ceiling.</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="category">
+  <div class="wrap">
+    <div class="category-head">
+      <div>
+        <h2>Guides</h2>
+        <p>Practical write-ups on the problems that actually come up at the printer.</p>
+      </div>
+      <a class="pill-link" href="guides.html">All guides</a>
+    </div>
+    <div class="card-grid">
+      <a class="card" href="guide-infill-patterns.html">
+        <span class="icon-badge"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 4L4 6.5V11.5L8 14L12 11.5V6.5L8 4Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M16 4L12 6.5V11.5L16 14L20 11.5V6.5L16 4Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" opacity="0.5"/><path d="M12 11.5L8 14V19L12 21.5L16 19V14L12 11.5Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" opacity="0.75"/></svg></span>
+        <h3>Infill Patterns &amp; Percentage</h3>
+        <p>What infill actually changes, and how to pick a sensible value.</p>
+      </a>
+      <a class="card" href="guide-stringing-retraction.html">
+        <span class="icon-badge"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 20V6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M8 10L12 6L16 10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M7 20H17" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" opacity="0.4"/></svg></span>
+        <h3>Fixing Stringing &amp; Retraction</h3>
+        <p>Why filament strings between parts, and how to fix it.</p>
+      </a>
+      <a class="card" href="guide-bed-adhesion.html">
+        <span class="icon-badge"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="4" y="16" width="16" height="3" rx="1" stroke="currentColor" stroke-width="1.6"/><path d="M8 13L8 16M12 11L12 16M16 13L16 16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M12 4L12 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" opacity="0.5"/><path d="M9.5 6.5L12 4L14.5 6.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/></svg></span>
+        <h3>Bed Adhesion Problems</h3>
+        <p>Warping, detaching prints, and patchy first layers.</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap footer-inner">
+    <span><strong>PrintCalc</strong> — built for people who'd rather print than do math.</span>
+    <span>Figures are estimates. Always confirm with your slicer before ordering material.</span>
+  </div>
+</footer>
+
+<script>
+  function updateDemo(){
+    var price = parseFloat(document.getElementById('demo-price').value) || 0;
+    var used = parseFloat(document.getElementById('demo-used').value) || 0;
+    var cost = (price / 1000) * used;
+    document.getElementById('demo-result').textContent = '$' + cost.toFixed(2);
+  }
+  document.getElementById('demo-price').addEventListener('input', updateDemo);
+  document.getElementById('demo-used').addEventListener('input', updateDemo);
+</script>
+
+</body>
+</html>

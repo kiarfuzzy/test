@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fixing Stringing: A Practical Guide to Retraction Settings — PrintCalc</title>
+<meta name="description" content="Why 3D prints string between parts, and a step-by-step way to dial in retraction distance, speed, and temperature to stop it.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Crect x='1' y='1' width='18' height='18' rx='5' fill='%234F46E5'/%3E%3Crect x='4' y='4' width='5' height='5' rx='1' fill='white'/%3E%3Crect x='11' y='4' width='5' height='5' rx='1' fill='white' opacity='0.6'/%3E%3Crect x='4' y='11' width='5' height='5' rx='1' fill='white' opacity='0.6'/%3E%3Crect x='11' y='11' width='5' height='5' rx='1' fill='white'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@700;800&amp;family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"Fixing Stringing: A Practical Guide to Retraction Settings","description":"Why 3D prints string between parts, and a step-by-step way to dial in retraction distance, speed, and temperature to stop it.","author":{"@type":"Organization","name":"PrintCalc"}}
+</script>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="logo" href="index.html">
+      <span class="mark"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><rect x="1" y="1" width="4" height="4" rx="1" fill="currentColor"/><rect x="8" y="1" width="5" height="4" rx="1" fill="currentColor" opacity="0.6"/><rect x="1" y="8" width="5" height="5" rx="1" fill="currentColor" opacity="0.6"/><rect x="8" y="8" width="5" height="5" rx="1" fill="currentColor"/></svg></span>
+      PrintCalc
+    </a>
+    <div class="nav-menu">
+      <div class="nav-item">
+        <a href="index.html#cost">Cost</a>
+        <div class="dropdown"><div class="dropdown-inner">
+          <a href="filament-cost.html">Filament Cost</a>
+          <a href="print-time-cost.html">Print Time &amp; Electricity</a>
+          <a href="total-print-cost.html">Total Print Cost</a>
+        </div></div>
+      </div>
+      <div class="nav-item">
+        <a href="index.html#convert">Convert</a>
+        <div class="dropdown"><div class="dropdown-inner">
+          <a href="weight-length.html">Weight ⇄ Length</a>
+          <a href="temperature.html">Temperature</a>
+          <a href="spool-remaining.html">Spool Remaining</a>
+        </div></div>
+      </div>
+      <div class="nav-item">
+        <a href="index.html#plan">Plan &amp; Tune</a>
+        <div class="dropdown"><div class="dropdown-inner">
+          <a href="material-usage.html">Material Usage</a>
+          <a href="model-scaling.html">Model Scaling</a>
+          <a href="print-speed.html">Print Speed / Flow</a>
+        </div></div>
+      </div>
+      <div class="nav-item">
+        <a href="guides.html">Guides</a>
+      </div>
+    </div>
+    <a class="nav-all" href="index.html#cost">All calculators</a>
+  </div>
+</nav>
+
+<div class="wrap breadcrumb"><a href="guides.html">Guides</a> / Stringing &amp; Retraction</div>
+<div class="wrap article-head">
+  <span class="eyebrow">Troubleshooting</span>
+  <h1>Fixing Stringing: A Practical Guide to Retraction Settings</h1>
+  <p class="dek">Those thin hairs of plastic between separate parts of a print are almost always a retraction or temperature problem — and both are quick to fix once you know where to look.</p>
+  <div class="article-meta"><span>7 min read</span></div>
+</div>
+
+<div class="wrap article-body">
+  <p class="lede">Stringing happens when a small amount of molten filament oozes out of the nozzle while it travels between two points that aren't connected by a print path. The nozzle drags that ooze along, and it cools into a thin string. It's almost never a sign of a broken printer — it's a settings problem, and a fixable one.</p>
+
+  <h2>What's actually causing it</h2>
+  <p>Four things contribute, roughly in order of how often they're the culprit:</p>
+  <ul>
+    <li><strong>Retraction isn't pulling back far or fast enough</strong> to relieve the pressure in the nozzle before a travel move.</li>
+    <li><strong>Nozzle temperature is too high</strong> for the filament, making it runnier than it needs to be and more prone to ooze.</li>
+    <li><strong>Wet filament.</strong> Hygroscopic materials like PETG and nylon absorb moisture from the air, and that moisture boils off during printing, causing exactly the kind of fine stringing and popping that looks like a retraction issue but isn't.</li>
+    <li><strong>Travel speed is too slow</strong>, giving ooze more time to stretch into a visible string before the nozzle reaches the next point.</li>
+  </ul>
+
+  <h2>Retraction distance and speed</h2>
+  <p>Retraction distance is how far the filament is pulled back before a travel move, and it depends heavily on your extruder type:</p>
+  <ul>
+    <li><strong>Bowden setups</strong> (motor mounted away from the hotend, filament pushed through a long tube) typically need <strong>3–7mm</strong> of retraction, because there's slack in the tube to take up before the pressure at the nozzle actually drops.</li>
+    <li><strong>Direct drive setups</strong> (motor mounted right on the hotend) usually only need <strong>0.5–2mm</strong>, since there's almost no slack between the extruder gear and the nozzle.</li>
+  </ul>
+  <p>Retraction speed is typically <strong>25–45mm/s</strong>. Too slow and it doesn't relieve pressure in time; too fast on some setups can strip the filament against the extruder gear or cause clicking.</p>
+
+  <div class="callout"><strong>Change one setting at a time.</strong> It's tempting to bump retraction distance, speed, and temperature all at once, but then you don't know which change actually fixed it — and you might have over-corrected on one while under-correcting on another. A small retraction tuning tower, printed once, is worth more than five guesses.</div>
+
+  <h2>Temperature</h2>
+  <p>Print at the lower end of your filament's recommended range and only raise it if you get poor layer adhesion. Lower nozzle temperature means less time spent runny, which directly reduces stringing potential before retraction even comes into play.</p>
+  <a class="calc-plug" href="temperature.html">
+    <span class="icon-badge"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M10.5 4.5a1.8 1.8 0 0 1 3.6 0v8.7a4 4 0 1 1-3.6 0V4.5Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12.3" cy="17" r="1.5" fill="currentColor"/></svg></span>
+    <span class="calc-plug-text"><strong>Temperature Converter</strong><span>Check typical nozzle and bed ranges by material, in both °C and °F.</span></span>
+    <span class="arrow">→</span>
+  </a>
+
+  <h2>A simple tuning process</h2>
+  <ol>
+    <li>Start at your filament's recommended nozzle temperature, at the low end of the range.</li>
+    <li>Set retraction distance to the typical starting point for your extruder type (see above) and retraction speed to around 35mm/s.</li>
+    <li>Print a test object with several separated towers or a simple retraction test model — most slicers have one built in or bundled with their sample files.</li>
+    <li>If stringing is still heavy, increase retraction distance in 0.5–1mm steps (Bowden) or 0.2–0.5mm steps (direct drive) and reprint.</li>
+    <li>Once distance looks close, drop nozzle temperature 5°C at a time until layer adhesion starts to suffer, then step back up 5°C.</li>
+    <li>If fine, hair-like stringing persists after distance and temperature are dialed in, dry your filament — that's the most common remaining cause.</li>
+  </ol>
+</div>
+
+<div class="wrap related">
+  <h2>More guides</h2>
+  <div class="related-grid">
+    <a class="card" href="guide-infill-patterns.html">
+      <span class="icon-badge"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 4L4 6.5V11.5L8 14L12 11.5V6.5L8 4Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M16 4L12 6.5V11.5L16 14L20 11.5V6.5L16 4Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" opacity="0.5"/><path d="M12 11.5L8 14V19L12 21.5L16 19V14L12 11.5Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" opacity="0.75"/></svg></span>
+      <h3>Choosing the Right Infill Pattern and Percentage</h3>
+      <p>What infill actually changes, and how to pick a sensible value.</p>
+    </a>
+    <a class="card" href="guide-bed-adhesion.html">
+      <span class="icon-badge"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="4" y="16" width="16" height="3" rx="1" stroke="currentColor" stroke-width="1.6"/><path d="M8 13L8 16M12 11L12 16M16 13L16 16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M12 4L12 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" opacity="0.5"/><path d="M9.5 6.5L12 4L14.5 6.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/></svg></span>
+      <h3>Bed Adhesion Problems and How to Fix Them</h3>
+      <p>Warping, detaching prints, and patchy first layers — sorted by likely cause.</p>
+    </a>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap footer-inner">
+    <span><strong>PrintCalc</strong> — built for people who'd rather print than do math.</span>
+    <span>Figures are estimates. Always confirm with your slicer before ordering material.</span>
+  </div>
+</footer>
+
+</body>
+</html>

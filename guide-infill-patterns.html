@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Choosing the Right Infill Pattern and Percentage — PrintCalc</title>
+<meta name="description" content="What infill percentage actually changes, the main infill patterns explained, and sensible percentages to use by project type.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Crect x='1' y='1' width='18' height='18' rx='5' fill='%234F46E5'/%3E%3Crect x='4' y='4' width='5' height='5' rx='1' fill='white'/%3E%3Crect x='11' y='4' width='5' height='5' rx='1' fill='white' opacity='0.6'/%3E%3Crect x='4' y='11' width='5' height='5' rx='1' fill='white' opacity='0.6'/%3E%3Crect x='11' y='11' width='5' height='5' rx='1' fill='white'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@700;800&amp;family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"Choosing the Right Infill Pattern and Percentage","description":"What infill percentage actually changes, the main infill patterns explained, and sensible percentages to use by project type.","author":{"@type":"Organization","name":"PrintCalc"}}
+</script>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="logo" href="index.html">
+      <span class="mark"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><rect x="1" y="1" width="4" height="4" rx="1" fill="currentColor"/><rect x="8" y="1" width="5" height="4" rx="1" fill="currentColor" opacity="0.6"/><rect x="1" y="8" width="5" height="5" rx="1" fill="currentColor" opacity="0.6"/><rect x="8" y="8" width="5" height="5" rx="1" fill="currentColor"/></svg></span>
+      PrintCalc
+    </a>
+    <div class="nav-menu">
+      <div class="nav-item">
+        <a href="index.html#cost">Cost</a>
+        <div class="dropdown"><div class="dropdown-inner">
+          <a href="filament-cost.html">Filament Cost</a>
+          <a href="print-time-cost.html">Print Time &amp; Electricity</a>
+          <a href="total-print-cost.html">Total Print Cost</a>
+        </div></div>
+      </div>
+      <div class="nav-item">
+        <a href="index.html#convert">Convert</a>
+        <div class="dropdown"><div class="dropdown-inner">
+          <a href="weight-length.html">Weight ⇄ Length</a>
+          <a href="temperature.html">Temperature</a>
+          <a href="spool-remaining.html">Spool Remaining</a>
+        </div></div>
+      </div>
+      <div class="nav-item">
+        <a href="index.html#plan">Plan &amp; Tune</a>
+        <div class="dropdown"><div class="dropdown-inner">
+          <a href="material-usage.html">Material Usage</a>
+          <a href="model-scaling.html">Model Scaling</a>
+          <a href="print-speed.html">Print Speed / Flow</a>
+        </div></div>
+      </div>
+      <div class="nav-item">
+        <a href="guides.html">Guides</a>
+      </div>
+    </div>
+    <a class="nav-all" href="index.html#cost">All calculators</a>
+  </div>
+</nav>
+
+<div class="wrap breadcrumb"><a href="guides.html">Guides</a> / Infill Patterns &amp; Percentage</div>
+<div class="wrap article-head">
+  <span class="eyebrow">Print settings</span>
+  <h1>Choosing the Right Infill Pattern and Percentage</h1>
+  <p class="dek">Infill is the easiest setting to leave on the default and the easiest one to get wrong. Here's what it actually changes, and how to pick a sensible value instead of guessing.</p>
+  <div class="article-meta"><span>6 min read</span></div>
+</div>
+
+<div class="wrap article-body">
+  <p class="lede">Infill is the internal lattice that fills the inside of a print. It's usually described as a percentage — 100% would be a fully solid part, 0% would be hollow — but the pattern you choose matters almost as much as the number.</p>
+
+  <h2>What infill percentage actually changes</h2>
+  <p>Percentage mostly trades off four things at once: strength, weight, material cost, and print time. Going from 10% to 50% infill roughly doubles or triples how much filament the interior of a part uses, which shows up directly in cost and print time — but the strength gain isn't linear. Past a certain point, more infill adds weight and print time faster than it adds usable strength, because the outer walls and top/bottom layers are doing most of the structural work for typical loads.</p>
+  <p>If you want to see the material and cost impact of a specific percentage before you commit to it, the <a href="material-usage.html">Material Usage Estimator</a> will translate infill percentage into an estimated weight for your model's volume.</p>
+
+  <h2>The main infill patterns</h2>
+  <p>Most slicers offer somewhere between six and fifteen pattern options. In practice, a handful cover nearly every situation:</p>
+  <ul>
+    <li><strong>Grid</strong> — a simple crossing line pattern. Fast to print, reasonably strong in the plane of the layers, and the default in a lot of slicers for good reason.</li>
+    <li><strong>Gyroid</strong> — a smooth, wavy 3D pattern that's strong in every direction rather than just along two axes. Slightly slower than grid but a good general-purpose choice, especially for parts that get stressed from more than one direction.</li>
+    <li><strong>Honeycomb</strong> — strong for its weight and visually satisfying if the part is ever seen in cross-section, but noticeably slower to print than grid or gyroid at the same percentage.</li>
+    <li><strong>Triangles / Tri-hexagon</strong> — very rigid, resists shearing well, and is a common pick for parts under mechanical load, like brackets or jigs.</li>
+    <li><strong>Cubic</strong> — a 3D pattern that prints reasonably fast and gives fairly even strength from multiple angles, similar in spirit to gyroid but with a more angular structure.</li>
+    <li><strong>Lightning</strong> — a newer, sparse pattern designed specifically to support the top surface with the least material possible. Excellent for purely decorative prints where you just need the top layers to not sag.</li>
+  </ul>
+
+  <div class="callout"><strong>Top and bottom layers are separate from infill.</strong> Solid layer count (usually 3–5 layers) does more for a part's stiffness and surface finish than infill percentage does. If a print feels flimsy, try adding a couple of top/bottom layers before reaching straight for a higher infill percentage.</div>
+
+  <h2>Picking a percentage by use case</h2>
+  <ul>
+    <li><strong>Decorative or display prints:</strong> 5–10%. The part just needs to hold its shape and support the top surface.</li>
+    <li><strong>Standard functional prints</strong> (brackets, organizers, enclosures): 15–25%. This is where most slicers default, and it's a reasonable middle ground.</li>
+    <li><strong>Parts under real mechanical load</strong> (gears, load-bearing brackets, jigs): 30–50%, usually paired with a stronger pattern like triangles or cubic and a higher wall count.</li>
+    <li><strong>Near-solid parts</strong> (small parts where strength matters more than time or material, or anything that will be drilled or tapped): 60–100%. Above roughly 80%, most slicers behave similarly to a fully solid print in terms of time and material.</li>
+  </ul>
+
+  <a class="calc-plug" href="material-usage.html">
+    <span class="icon-badge"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3L20.5 8V17L12 22L3.5 17V8L12 3Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M12 3V12.5M12 12.5L20.5 8M12 12.5L3.5 8M12 12.5V22" stroke="currentColor" stroke-width="1.1" opacity="0.5"/></svg></span>
+    <span class="calc-plug-text"><strong>Material Usage Estimator</strong><span>See how a given infill percentage affects estimated filament weight for your model.</span></span>
+    <span class="arrow">→</span>
+  </a>
+
+  <h2>A simple way to decide</h2>
+  <p>Start from the use case, not the number. Pick a pattern based on how the part will be loaded — grid or gyroid for general use, triangles or cubic if it needs to resist bending or shear — and then pick the lowest percentage in the relevant range above. It's much cheaper to reprint at a higher percentage after a part fails than to over-build every print "just in case."</p>
+</div>
+
+<div class="wrap related">
+  <h2>More guides</h2>
+  <div class="related-grid">
+    <a class="card" href="guide-stringing-retraction.html">
+      <span class="icon-badge"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 20V6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M8 10L12 6L16 10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M7 20H17" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" opacity="0.4"/></svg></span>
+      <h3>Fixing Stringing: A Practical Guide to Retraction</h3>
+      <p>Why filament strings between parts, and how to dial in retraction settings.</p>
+    </a>
+    <a class="card" href="guide-bed-adhesion.html">
+      <span class="icon-badge"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="4" y="16" width="16" height="3" rx="1" stroke="currentColor" stroke-width="1.6"/><path d="M8 13L8 16M12 11L12 16M16 13L16 16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M12 4L12 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" opacity="0.5"/><path d="M9.5 6.5L12 4L14.5 6.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/></svg></span>
+      <h3>Bed Adhesion Problems and How to Fix Them</h3>
+      <p>Warping, detaching prints, and patchy first layers — sorted by likely cause.</p>
+    </a>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap footer-inner">
+    <span><strong>PrintCalc</strong> — built for people who'd rather print than do math.</span>
+    <span>Figures are estimates. Always confirm with your slicer before ordering material.</span>
+  </div>
+</footer>
+
+</body>
+</html>

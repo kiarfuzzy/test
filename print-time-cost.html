@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Print Time &amp; Electricity Cost Calculator — PrintCalc</title>
+<meta name="description" content="Calculate the electricity cost of a 3D print from your printer's power draw and print time. Free, instant.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Crect x='1' y='1' width='18' height='18' rx='5' fill='%234F46E5'/%3E%3Crect x='4' y='4' width='5' height='5' rx='1' fill='white'/%3E%3Crect x='11' y='4' width='5' height='5' rx='1' fill='white' opacity='0.6'/%3E%3Crect x='4' y='11' width='5' height='5' rx='1' fill='white' opacity='0.6'/%3E%3Crect x='11' y='11' width='5' height='5' rx='1' fill='white'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@700;800&amp;family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="logo" href="index.html">
+      <span class="mark"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><rect x="1" y="1" width="4" height="4" rx="1" fill="currentColor"/><rect x="8" y="1" width="5" height="4" rx="1" fill="currentColor" opacity="0.6"/><rect x="1" y="8" width="5" height="5" rx="1" fill="currentColor" opacity="0.6"/><rect x="8" y="8" width="5" height="5" rx="1" fill="currentColor"/></svg></span>
+      PrintCalc
+    </a>
+    <div class="nav-menu">
+      <div class="nav-item">
+        <a href="index.html#cost">Cost</a>
+        <div class="dropdown"><div class="dropdown-inner">
+          <a href="filament-cost.html">Filament Cost</a>
+          <a href="print-time-cost.html">Print Time &amp; Electricity</a>
+          <a href="total-print-cost.html">Total Print Cost</a>
+        </div></div>
+      </div>
+      <div class="nav-item">
+        <a href="index.html#convert">Convert</a>
+        <div class="dropdown"><div class="dropdown-inner">
+          <a href="weight-length.html">Weight ⇄ Length</a>
+          <a href="temperature.html">Temperature</a>
+          <a href="spool-remaining.html">Spool Remaining</a>
+        </div></div>
+      </div>
+      <div class="nav-item">
+        <a href="index.html#plan">Plan &amp; Tune</a>
+        <div class="dropdown"><div class="dropdown-inner">
+          <a href="material-usage.html">Material Usage</a>
+          <a href="model-scaling.html">Model Scaling</a>
+          <a href="print-speed.html">Print Speed / Flow</a>
+        </div></div>
+      </div>
+      <div class="nav-item">
+        <a href="guides.html">Guides</a>
+      </div>
+    </div>
+    <a class="nav-all" href="index.html#cost">All calculators</a>
+  </div>
+</nav>
+
+<div class="wrap breadcrumb"><a href="index.html#cost">Cost</a> / Print Time &amp; Electricity</div>
+<div class="wrap page-head">
+  <h1>Print Time &amp; Electricity Cost Calculator</h1>
+  <p>Factor in your printer's power draw and your electricity rate to see the energy cost behind a print.</p>
+</div>
+
+<div class="wrap calc-layout">
+  <div class="panel">
+    <p class="panel-title">Your numbers</p>
+    <div class="field-row">
+      <div class="field">
+        <label for="pt-hours">Print time — hours</label>
+        <input type="number" id="pt-hours" step="1" min="0" value="3" inputmode="decimal">
+      </div>
+      <div class="field">
+        <label for="pt-minutes">Minutes</label>
+        <input type="number" id="pt-minutes" step="1" min="0" max="59" value="30" inputmode="decimal">
+      </div>
+    </div>
+    <div class="field">
+      <label for="pt-watts">Printer power draw (W)</label>
+      <input type="number" id="pt-watts" step="1" min="0" value="120" inputmode="decimal">
+      <p class="field-hint">120W is a reasonable average for a modern FDM printer while printing — check your printer's spec sheet for an exact figure.</p>
+    </div>
+    <div class="field">
+      <label for="pt-rate">Electricity rate ($/kWh)</label>
+      <input type="number" id="pt-rate" step="0.01" min="0" value="0.15" inputmode="decimal">
+      <p class="field-hint">Rates vary a lot by location — check a recent utility bill for yours.</p>
+    </div>
+  </div>
+  <div class="results-panel" aria-live="polite">
+    <p class="panel-title">Result</p>
+    <div class="result-row primary">
+      <span class="result-label">Electricity cost</span>
+      <span class="result-value" id="pt-cost">$0.06</span>
+    </div>
+    <div class="result-row">
+      <span class="result-label">Energy used</span>
+      <span class="result-value" id="pt-kwh">0.420 kWh</span>
+    </div>
+  </div>
+</div>
+
+<div class="wrap related">
+  <h2>Related calculators</h2>
+  <div class="related-grid">
+    <a class="card" href="filament-cost.html">
+      <span class="icon-badge"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="6.2" stroke="currentColor" stroke-width="1" stroke-dasharray="2 2" opacity="0.6"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.6"/><path d="M18.5 18.5L21 21" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
+      <h3>Filament Cost</h3>
+      <p>Spool price + grams used → the real cost, to the cent.</p>
+    </a>
+    <a class="card" href="total-print-cost.html">
+      <span class="icon-badge"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3L21 8.5L12 14L3 8.5L12 3Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M3 13.5L12 19L21 13.5" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></span>
+      <h3>Total Print Cost</h3>
+      <p>Filament, electricity, depreciation, and labor — combined.</p>
+    </a>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap footer-inner">
+    <span><strong>PrintCalc</strong> — built for people who'd rather print than do math.</span>
+    <span>Figures are estimates. Always confirm with your slicer before ordering material.</span>
+  </div>
+</footer>
+
+<script>
+  var $ = function(id){ return document.getElementById(id); };
+  var fmt = function(n, d){ d = d === undefined ? 2 : d; return isFinite(n) ? n.toFixed(d) : (0).toFixed(d); };
+  function calc(){
+    var hours = parseFloat($('pt-hours').value) || 0;
+    var minutes = parseFloat($('pt-minutes').value) || 0;
+    var watts = parseFloat($('pt-watts').value) || 0;
+    var rate = parseFloat($('pt-rate').value) || 0;
+    var totalHours = hours + minutes / 60;
+    var kWh = (watts / 1000) * totalHours;
+    var cost = kWh * rate;
+    $('pt-kwh').textContent = fmt(kWh, 3) + ' kWh';
+    $('pt-cost').textContent = '$' + fmt(cost, 2);
+  }
+  ['pt-hours','pt-minutes','pt-watts','pt-rate'].forEach(function(id){ $(id).addEventListener('input', calc); });
+  calc();
+</script>
+
+</body>
+</html>

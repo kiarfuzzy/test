@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Filament Spool Remaining Calculator — PrintCalc</title>
+<meta name="description" content="Weigh your spool and find out exactly how much filament weight and length you have left. Free, instant.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Crect x='1' y='1' width='18' height='18' rx='5' fill='%234F46E5'/%3E%3Crect x='4' y='4' width='5' height='5' rx='1' fill='white'/%3E%3Crect x='11' y='4' width='5' height='5' rx='1' fill='white' opacity='0.6'/%3E%3Crect x='4' y='11' width='5' height='5' rx='1' fill='white' opacity='0.6'/%3E%3Crect x='11' y='11' width='5' height='5' rx='1' fill='white'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@700;800&amp;family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="logo" href="index.html">
+      <span class="mark"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><rect x="1" y="1" width="4" height="4" rx="1" fill="currentColor"/><rect x="8" y="1" width="5" height="4" rx="1" fill="currentColor" opacity="0.6"/><rect x="1" y="8" width="5" height="5" rx="1" fill="currentColor" opacity="0.6"/><rect x="8" y="8" width="5" height="5" rx="1" fill="currentColor"/></svg></span>
+      PrintCalc
+    </a>
+    <div class="nav-menu">
+      <div class="nav-item">
+        <a href="index.html#cost">Cost</a>
+        <div class="dropdown"><div class="dropdown-inner">
+          <a href="filament-cost.html">Filament Cost</a>
+          <a href="print-time-cost.html">Print Time &amp; Electricity</a>
+          <a href="total-print-cost.html">Total Print Cost</a>
+        </div></div>
+      </div>
+      <div class="nav-item">
+        <a href="index.html#convert">Convert</a>
+        <div class="dropdown"><div class="dropdown-inner">
+          <a href="weight-length.html">Weight ⇄ Length</a>
+          <a href="temperature.html">Temperature</a>
+          <a href="spool-remaining.html">Spool Remaining</a>
+        </div></div>
+      </div>
+      <div class="nav-item">
+        <a href="index.html#plan">Plan &amp; Tune</a>
+        <div class="dropdown"><div class="dropdown-inner">
+          <a href="material-usage.html">Material Usage</a>
+          <a href="model-scaling.html">Model Scaling</a>
+          <a href="print-speed.html">Print Speed / Flow</a>
+        </div></div>
+      </div>
+      <div class="nav-item">
+        <a href="guides.html">Guides</a>
+      </div>
+    </div>
+    <a class="nav-all" href="index.html#cost">All calculators</a>
+  </div>
+</nav>
+
+<div class="wrap breadcrumb"><a href="index.html#convert">Convert</a> / Spool Remaining</div>
+<div class="wrap page-head">
+  <h1>Filament Spool Remaining Calculator</h1>
+  <p>Put the spool on a kitchen scale, enter the total weight and your spool's empty weight — find out exactly how much filament is left.</p>
+</div>
+
+<div class="wrap calc-layout">
+  <div class="panel">
+    <p class="panel-title">Your numbers</p>
+    <div class="field">
+      <label for="sr-total">Total weight on scale (g)</label>
+      <input type="number" id="sr-total" step="1" min="0" value="550" inputmode="decimal">
+    </div>
+    <div class="field">
+      <label for="sr-tare">Empty spool weight (g)</label>
+      <input type="number" id="sr-tare" step="1" min="0" value="200" inputmode="decimal">
+      <p class="field-hint">Commonly 130–250g depending on the brand — check the spool itself or the manufacturer's spec sheet if it's printed anywhere.</p>
+    </div>
+    <div class="field-row">
+      <div class="field">
+        <label for="sr-material">Material</label>
+        <select id="sr-material">
+          <option value="PLA" selected>PLA</option>
+          <option value="PETG">PETG</option>
+          <option value="ABS">ABS</option>
+          <option value="TPU">TPU (flexible)</option>
+          <option value="NYLON">Nylon</option>
+          <option value="ASA">ASA</option>
+          <option value="CUSTOM">Custom density…</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="sr-diameter">Diameter</label>
+        <select id="sr-diameter">
+          <option value="1.75" selected>1.75 mm</option>
+          <option value="2.85">2.85 mm</option>
+        </select>
+      </div>
+    </div>
+    <div class="field" id="sr-custom-density-field" style="display:none;">
+      <label for="sr-custom-density">Custom density (g/cm³)</label>
+      <input type="number" id="sr-custom-density" step="0.01" min="0.1" value="1.24" inputmode="decimal">
+    </div>
+  </div>
+  <div class="results-panel" aria-live="polite">
+    <p class="panel-title">Result</p>
+    <div class="result-row primary">
+      <span class="result-label">Filament remaining</span>
+      <span class="result-value" id="sr-weight">350.0 g</span>
+    </div>
+    <div class="result-row">
+      <span class="result-label">Remaining length</span>
+      <span class="result-value" id="sr-length">117.3 m</span>
+    </div>
+    <div class="result-row">
+      <span class="result-label">Share of a full 1kg spool</span>
+      <span class="result-value" id="sr-percent">35.0%</span>
+    </div>
+  </div>
+</div>
+
+<div class="wrap related">
+  <h2>Related calculators</h2>
+  <div class="related-grid">
+    <a class="card" href="weight-length.html">
+      <span class="icon-badge"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 8V16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M20 8V16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M4 12H20" stroke="currentColor" stroke-width="1.6"/><path d="M7.5 9L4 12L7.5 15" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M16.5 9L20 12L16.5 15" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      <h3>Weight ⇄ Length</h3>
+      <p>Type either value for any material — the other updates.</p>
+    </a>
+    <a class="card" href="filament-cost.html">
+      <span class="icon-badge"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="6.2" stroke="currentColor" stroke-width="1" stroke-dasharray="2 2" opacity="0.6"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.6"/><path d="M18.5 18.5L21 21" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
+      <h3>Filament Cost</h3>
+      <p>Spool price + grams used → the real cost, to the cent.</p>
+    </a>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap footer-inner">
+    <span><strong>PrintCalc</strong> — built for people who'd rather print than do math.</span>
+    <span>Figures are estimates. Always confirm with your slicer before ordering material.</span>
+  </div>
+</footer>
+
+<script>
+  var $ = function(id){ return document.getElementById(id); };
+  var fmt = function(n, d){ d = d === undefined ? 1 : d; return isFinite(n) ? n.toFixed(d) : (0).toFixed(d); };
+  var DENSITY = { PLA:1.24, PETG:1.27, ABS:1.04, TPU:1.21, NYLON:1.14, ASA:1.07 };
+  function density(){
+    var sel = $('sr-material').value;
+    if (sel === 'CUSTOM') return parseFloat($('sr-custom-density').value) || 1.24;
+    return DENSITY[sel];
+  }
+  function calc(){
+    var total = parseFloat($('sr-total').value) || 0;
+    var tare = parseFloat($('sr-tare').value) || 0;
+    var remainingG = Math.max(0, total - tare);
+    var d = density();
+    var dMm = parseFloat($('sr-diameter').value) || 1.75;
+    var rCm = (dMm / 10) / 2;
+    var area = Math.PI * rCm * rCm;
+    var volume = remainingG / d;
+    var lengthM = area > 0 ? (volume / area) / 100 : 0;
+    var percent = (remainingG / 1000) * 100;
+    $('sr-weight').textContent = fmt(remainingG, 1) + ' g';
+    $('sr-length').textContent = fmt(lengthM, 1) + ' m';
+    $('sr-percent').textContent = fmt(percent, 1) + '%';
+  }
+  ['sr-total','sr-tare','sr-diameter','sr-custom-density'].forEach(function(id){ $(id).addEventListener('input', calc); });
+  $('sr-material').addEventListener('change', function(){
+    $('sr-custom-density-field').style.display = $('sr-material').value === 'CUSTOM' ? 'flex' : 'none';
+    calc();
+  });
+  calc();
+</script>
+
+</body>
+</html>
